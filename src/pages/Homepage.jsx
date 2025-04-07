@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import "./Homepage.css";
 export default function Homepage() {
     return (
-        <div className="homepage">
-            <h1>Welcome to the Homepage</h1>
-            <p>This is the main page of the application.</p>
-            <Link to="/">Go back to Login</Link>
-        </div>
+        <div className= " w-[338px] h-[400px] border border-black relative"  >
+           
+            <div className="absolute bg-red-400 w-36 h-36 top-32 left-2/4"></div>
+            <div className="fixed bg-blue-500 w-36 h-36 top-32 left-2/4"></div>
+
+            </div>
+        
     );
 }
