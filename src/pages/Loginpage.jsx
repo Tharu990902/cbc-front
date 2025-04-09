@@ -1,53 +1,52 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function Loginpage() {
+
+    const[email, setEmail] = useState("your email")
+    const[password, setPassword] = useState("");
+
+    function handleLogin(){
+        
+        axios.post("http://localhost:5000/api/user/login" , {
+            email:email,
+            password:password
+        }).then((response) => {
+            if(response.data.user == null){
+                toast.error(response.data.message);
+                return;
+            }
+            
+            localStorage.setItem("token", response.data.token); // store token
+            if(response.data.user.type === "admin"){
+                window.location.href = "/admin";
+            }
+            else if (response.data.user.type === "customer") {
+                window.location.href = "/";
+            }
+            
+        }
+        ).catch((error) => {
+            console.log(error);
+            alert("Invalid credentials");
+        });
+
+    }
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-            <div className="w-full max-w-md p-10 bg-white shadow-2xl rounded-2xl">
-                <h1 className="mb-6 text-3xl font-bold text-center text-gray-800">Login to Your Account</h1>
-                
-                <form className="space-y-5">
-                    <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="example@mail.com"
-                            className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="••••••••"
-                            className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                        />
-                    </div>
+        <div className="flex items-center justify-center w-full h-screen bg-red-300">
 
-                    <div className="flex items-center justify-between text-sm">
-                        <div>
-                            <input type="checkbox" id="remember" className="mr-1" />
-                            <label htmlFor="remember" className="text-gray-600">Remember me</label>
-                        </div>
-                        <Link to="/forgot-password" className="text-purple-600 hover:underline">Forgot Password?</Link>
-                    </div>
+            <div className=" h-[450px] w-[450px] bg-gray-400 flex items-center justify-center flex-col rounded-lg shadow-lg">
 
-                    <button
-                        type="submit"
-                        className="w-full py-2 font-semibold text-white transition duration-300 bg-purple-600 rounded-lg hover:bg-purple-700"
-                    >
-                        Sign In
-                    </button>
-                </form>
+                <img src="../../public/logo.jpg" alt="Logo" className="w-20 h-20 mb-10 rounded-full" />
 
-                <p className="mt-6 text-sm text-center text-gray-600">
-                    Don’t have an account?{" "}
-                    <Link to="/register" className="text-purple-600 hover:underline">
-                        Register Now
-                    </Link>
-                </p>
+                <span>Email</span>
+                <input type="text" defaultValue={email}  onChange ={(e)=>{setEmail(e.target.value)}}  className="w-[300px] h-10 mb-5 rounded-md" />
+
+                <span>Password</span>
+                <input type="password" defaultValue={password} onChange={(e)=>{setPassword(e.target.value)}} className="w-[300px] h-10 mb-5 rounded-md" />
+                <button className="bg-blue-400" onClick={handleLogin}>Login</button>
             </div>
         </div>
     );
