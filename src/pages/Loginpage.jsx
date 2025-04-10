@@ -2,11 +2,14 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function Loginpage() {
 
     const[email, setEmail] = useState("your email")
     const[password, setPassword] = useState("");
+
+    const navigate = useNavigate();
 
     function handleLogin(){
         
@@ -21,10 +24,10 @@ export default function Loginpage() {
             
             localStorage.setItem("token", response.data.token); // store token
             if(response.data.user.type === "admin"){
-                window.location.href = "/admin";
+                navigate("/admin/dashboard");
             }
             else if (response.data.user.type === "customer") {
-                window.location.href = "/";
+                navigate("/");
             }
             
         }

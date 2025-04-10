@@ -2,6 +2,7 @@ import { Link, Route , Routes} from "react-router-dom";
 import { GoGraph } from "react-icons/go";
 import { FaUsers, FaCog, FaChartBar } from "react-icons/fa";
 import Adminproductpage from "./admin/adminproductpage";
+import AddProductform from "./admin/addProductform.jsx";
 
 export default function Adminhomepage() {
     return (
@@ -48,6 +49,7 @@ export default function Adminhomepage() {
                 <Routes path="/*">  
                     <Route path="/dashboard" element={<h1>Dashboard</h1>} />
                     <Route path="/products" element={<Adminproductpage />} />
+                    <Route path="products/addProduct" element={<AddProductform />} />
                     <Route path="/settings" element={<h1>Settings</h1>} />
                     <Route path="/reports" element={<h1>Reports</h1>} />
                 </Routes>  
