@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import toast from "react-hot-toast";
+import {  Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 export default function Loginpage() {
@@ -18,7 +18,7 @@ export default function Loginpage() {
             password:password
         }).then((response) => {
             if(response.data.user == null){
-                toast.error(response.data.message);
+                Toaster.error(response.data.message);
                 return;
             }
             

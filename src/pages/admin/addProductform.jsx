@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 
 import { useState } from "react"
 import axios from "axios"
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Uploadfile from "../../../utils/mediaUpload";
 
 
 export default function AddProductform() {
@@ -10,7 +12,8 @@ export default function AddProductform() {
    const [productId, setProductId] = useState("");
    const [productName, setProductName] = useState("");
     const [alternativeName, setAlternativeName] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
+    const[imageurl, setImageUrl] = useState("");
+    const [imageFile, setImageFile] = useState([]);
     const [price, setPrice] = useState("");
     const [lastPrice, setLastPrice] = useState("");
     const [stock, setStock] = useState("");
@@ -21,7 +24,16 @@ export default function AddProductform() {
      async function handleAddProduct() {
 
         const altname = alternativeName.split(",")
-        const imageurl = imageUrl.split(",")
+        const promisesArray = [];
+
+        for(let i = 0; i < imageFile.length; i++){
+
+            promisesArray[i] = Uploadfile(imageFile[i]);
+        }
+
+        const imageurl = await Promise.all(promisesArray)
+        console.log(imageurl);
+
    
         const product = {
             productId: productId,
@@ -49,7 +61,7 @@ export default function AddProductform() {
             navigae("/admin/products");
             toast.success("Product added successfully!");
         }
-        // eslint-disable-next-line no-unused-vars
+    
         catch(error) {
             toast.error("Failed to add product. Please try again.");
         }
@@ -79,10 +91,14 @@ export default function AddProductform() {
                     setAlternativeName(e.target.value)
                 }}/>
 
-                <span>Image URL</span>
-                <input type="text" value={imageUrl} className="w-[300px] h-10 mb-5 rounded-md" onChange={(e)=>{
-                    setImageUrl(e.target.value)
-                }} />
+                <span>Image File</span>
+                <input
+                    type="file" className="w-[300px] h-10 mb-5 rounded-md" onChange={(e) => {
+                        setImageFile(e.target.files);
+                        }}
+                        multiple
+                        />
+
 
                 <span>Price</span>
                 <input type="number" value={price} className="w-[300px] h-10 mb-5 rounded-md" onChange={(e)=>{
