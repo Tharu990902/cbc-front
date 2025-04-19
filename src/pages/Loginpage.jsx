@@ -3,7 +3,6 @@ import { useState } from "react";
 import axios from "axios";
 import {  Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
 export default function Loginpage() {
 
     const[email, setEmail] = useState("your email")
@@ -11,9 +10,10 @@ export default function Loginpage() {
 
     const navigate = useNavigate();
 
+
     function handleLogin(){
         
-        axios.post("http://localhost:5000/api/user/login" , {
+        axios.post(import.meta.env.VITE_Backend_url +"/api/user/login" , {
             email:email,
             password:password
         }).then((response) => {

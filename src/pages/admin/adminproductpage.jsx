@@ -43,8 +43,6 @@ export default function Adminproductpage() {
       });
   }
   
-    
-
   return (
     <div className="relative min-h-screen p-6 bg-gray-100">
         <Link to= {"/admin/products/addProduct"} className="absolute right-[25px] bottom-[50px] text-[25px] bg-red-400 p-5 hover:bg-blue-400 rounded-[10px] "><FaPlus /></Link>

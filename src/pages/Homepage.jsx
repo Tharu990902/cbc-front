@@ -1,12 +1,17 @@
-import { Link } from "react-router-dom";
+import { Routes , Route } from "react-router-dom";
+import Adminproductpage from "./admin/adminproductpage.jsx";
+import Header from "../components/Header.jsx";
+
 export default function Homepage() {
     return (
-        <div className= " w-[338px] h-[400px] border border-black relative">
+        <div className="w-full h-screen bg-[#FFF8F8]">
+            <Header />
+             <Routes path ="/*">
+             <Route path="/products" element={<Adminproductpage />} />
+            </Routes> 
            
-            <div className="absolute bg-red-400 w-36 h-36 top-32 left-2/4"></div>
-            <div className="fixed bg-blue-500 w-36 h-36 top-32 left-2/4"></div>
 
-            </div>
+        </div>
         
     );
 }
