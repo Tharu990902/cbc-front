@@ -3,17 +3,19 @@ import { useEffect, useState } from "react";
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function Adminproductpage() {
   const [products, setProducts] = useState([]);
   const [productloading, setproductLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if(!productloading){
-      axios.get("http://localhost:5000/api/product")
+      axios.get(import.meta.env.VITE_Backend_url +"/api/product")
       .then((response) => {
         setProducts(response.data);
-        console.log(response.data);
         setproductLoading(true);
       })
       .catch((error) => {
@@ -27,7 +29,7 @@ export default function Adminproductpage() {
   const handleDelete = (productId) => {
     const token = localStorage.getItem("token");
     axios
-      .delete(`http://localhost:5000/api/product/${productId}`, {
+      .delete(import.meta.env.VITE_Backend_url +`/api/product/${productId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -77,7 +79,9 @@ export default function Adminproductpage() {
                     <button className="text-red-500 hover:text-red-700" onClick={() => handleDelete(product.productId)}>
                       <FaTrash />
                     </button>
-                    <button className="text-blue-500 hover:text-blue-700">
+                    <button className="text-blue-500 hover:text-blue-700" onClick={() => {
+                      navigate("/admin/products/editProduct", { state: { product: product } });
+                    }}>
                       <FaEdit />
                     </button>
                   </td>

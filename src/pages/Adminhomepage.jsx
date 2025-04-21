@@ -3,6 +3,7 @@ import { GoGraph } from "react-icons/go";
 import { FaUsers, FaCog, FaChartBar } from "react-icons/fa";
 import Adminproductpage from "./admin/adminproductpage";
 import AddProductform from "./admin/addProductform.jsx";
+import EditProductForm from "./admin/editproductForm.jsx";
 
 export default function Adminhomepage() {
     return (
@@ -47,9 +48,10 @@ export default function Adminhomepage() {
             {/* Main Content Area */}
             <div className="bg-white w-[80%] h-full p-10 overflow-auto">
                 <Routes path="/*">  
-                    <Route path="/dashboard" element={<h1>Dashboard</h1>} />
+                    
                     <Route path="/products" element={<Adminproductpage />} />
                     <Route path="products/addProduct" element={<AddProductform />} />
+                    <Route path="/products/editProduct" element={<EditProductForm />} />
                     <Route path="/settings" element={<h1>Settings</h1>} />
                     <Route path="/reports" element={<h1>Reports</h1>} />
                 </Routes>  

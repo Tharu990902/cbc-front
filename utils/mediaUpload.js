@@ -1,7 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
+
 const key = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV1YXhkdW1nZ3l2eWJvaG92bnJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQzNTM2MTAsImV4cCI6MjA1OTkyOTYxMH0.f6STyvo4u6N7fErV7Vd28fs_zgooiB3PXtBTCezbfSM`
 
 const url = "https://uuaxdumggyvybohovnrs.supabase.co"
+
+export const superbase = createClient(url, key);
 
 export default function Uploadfile(file){
 
@@ -20,7 +23,7 @@ export default function Uploadfile(file){
             reject("Please select a valid file type (png, jpg, jpeg).")
         }
 
-        const superbase = createClient(url, key);
+       
         const timstamp = new Date().getTime();
 
         fileName = timstamp+"."+ fileExtention;
