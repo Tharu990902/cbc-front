@@ -4,6 +4,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ImageSlider from "../../components/imageslider";
+import { Addtocart, clearcard, Savecart } from "../../../utils/cardfunction";
+import toast from "react-hot-toast";
 
 export default function Productinfo() {
     const params = useParams();
@@ -27,6 +29,12 @@ export default function Productinfo() {
                 }
             })
     }, []);
+
+    function onaddtocart(){
+        Addtocart(product.productId , 1);
+        toast.success("add to cart")
+        
+    }
     
     return (
         <div className="w-full h-[calc(100vh-80px)]">
@@ -55,6 +63,10 @@ export default function Productinfo() {
         <p className="mb-1 text-gray-600"><span className="font-semibold">Price: </span>{(product.price>product.lastprice)&&<span className="text-red-600 line-through">LKR. {product.price}</span>}<span>{" LKR."+ product.lastprice}</span></p>
         <p className="mb-1 text-gray-600"><span className="font-semibold">Stock:</span> {product.stock}</p>
         <p className="mb-1 text-gray-600"><span className="font-semibold">Description:</span> {product.description}</p>
+
+        <div>
+          <button className="bg-blue-500" onClick={onaddtocart}>Add to Cart</button>
+        </div>
       </div>
     </div>
   </div>
