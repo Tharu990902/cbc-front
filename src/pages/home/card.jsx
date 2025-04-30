@@ -18,6 +18,7 @@ export default function Cart() {
       console.log(res.data)
       setTotal(res.data.Total)
       setLabeldTotal(res.data.labeldTotal)
+      
     })
   }, []);
 

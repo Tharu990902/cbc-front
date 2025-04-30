@@ -9,6 +9,7 @@ export default function ProductCard({ productId, productname, images, price, las
       to={`/productinfo/${productId}`}
       className="w-[300px] bg-slate-300 m-3 mt-5 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group"
     >
+    
       {/* Image */}
       <div className="w-full h-[220px] overflow-hidden">
         <img

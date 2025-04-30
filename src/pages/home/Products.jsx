@@ -21,7 +21,7 @@ export default function Products(){
         })
     }},[])
     return(
-        <div className="w-full h-[calc(100vh-80px)]  bg-[#FFF8F8] overflow-y-scroll flex  flex-wrap items-start    justify-center">
+        <div className="w-full h-[calc(100vh-80px)]  bg-[#FFF8F8] overflow-y-scroll flex  flex-wrap items-start  justify-center">
             {
                 products.map((product) => 
                     <ProductCard
