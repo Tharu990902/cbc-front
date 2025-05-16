@@ -5,6 +5,8 @@ import Productinfo  from "./home/Productinfo.jsx";
 import SignUpPage from "./Signinpage.jsx";
 import Products from "./home/Products.jsx";
 import Cart from "./home/card.jsx";
+import Shippingpage from "./home/shippingpage.jsx";
+import OrderPage from "./home/order.jsx";
 
 export default function Homepage() {
     return (
@@ -17,6 +19,8 @@ export default function Homepage() {
             <Route path="/productinfo/:id" element={<Productinfo/>} />
             <Route path="/products" element={<Products/>} />
             <Route path="/cart" element={<Cart/>} />
+            <Route path = "/shipping" element={<Shippingpage/>} />
+            <Route path ="/orders" element={<OrderPage/>} />
             </Routes> 
             </div>
              

@@ -2,18 +2,26 @@ import { useEffect, useState } from "react";
 import { Loadcard } from "../../../utils/cardfunction.js";
 import CartFrame from "../../components/cardFrame.jsx";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
   const [Total, setTotal] = useState(0);
   const [labeldTotal , setLabeldTotal] = useState(0);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     setCart(Loadcard());
     console.log(Loadcard());
 
     axios.post(import.meta.env.VITE_Backend_url +"/api/order/quote" , {
-      order_items: Loadcard() }
+      order_items: Loadcard() 
+    },{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }
     ).then((res)=>{
       console.log(res.data)
       setTotal(res.data.Total)
@@ -24,28 +32,13 @@ export default function Cart() {
 
   function onOrderCheckoutClick(){
 
-    const token = localStorage.getItem("token");
-    if(token == null){
-      return
+   navigate("/shipping" , {
+    state: {
+      order_items: cart,
+      Total: Total,
+      labeldTotal: labeldTotal
     }
-    axios.post(
-      `${import.meta.env.VITE_Backend_url}/api/order`,
-      {
-        order_items: cart,
-        name: "tharu",
-        address: "dickwella",
-        phoneNo: "07865543"
-      },
-      {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      }
-    
-    
-    ).then((res)=>{
-      console.log(res.data)
-    })
+   })
   }
 
   return (

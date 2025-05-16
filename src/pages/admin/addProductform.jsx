@@ -120,7 +120,6 @@ export default function AddProductform() {
                 <button className="w-[200px] bg-blue-900 text-white rounded-[10px] mb-4" onClick={handleAddProduct}>Add Product</button>
                 </div>
                 </div>
-            
             </div>
     )
 }
